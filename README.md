@@ -1,6 +1,10 @@
 # abusive-ips
 
-Time to start collecting IP's that routinely show abuse(typically in the form of brute force ssh attacks):
+Time to start collecting IP's that routinely show abuse.
+
+Most of these IPS are attempting brute force ssh attacks.
+
+If you're going to copy and paste, best to do that from [raw file](https://raw.githubusercontent.com/SolidServerSystems/abusive-ips/master/README.md).
 
 121.18.238.9
 221.194.44.218
