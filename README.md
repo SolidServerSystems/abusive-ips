@@ -1,10 +1,10 @@
 # abusive-ips
 
-Time to start collecting IP's that routinely show abuse.
+The following IP's routinely show abuse on our servers, most of which are attempting brute force ssh attacks. If you're going to copy and paste, best to do that from [raw file](https://raw.githubusercontent.com/SolidServerSystems/abusive-ips/master/README.md).
 
-Most of these IPS are attempting brute force ssh attacks.
+### [The Raw File](https://raw.githubusercontent.com/SolidServerSystems/abusive-ips/master/README.md)
 
-If you're going to copy and paste, best to do that from [raw file](https://raw.githubusercontent.com/SolidServerSystems/abusive-ips/master/README.md).
+---
 
 116.31.116.35
 112.217.150.112
