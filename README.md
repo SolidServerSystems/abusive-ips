@@ -4,6 +4,14 @@ The following IP's routinely show abuse on our servers, most of which are attemp
 
 ### [The Raw File](https://raw.githubusercontent.com/SolidServerSystems/abusive-ips/master/README.md)
 
+
+#### TO DO
+
+- [x] De Dup IPs
+- [ ] Place IP list in separate file
+- [ ] Add instructions on how to block IPS from hitting ubuntu servers
+- [ ] Create online tool for parsing out IPS
+
 ---
 
 116.31.116.35
