@@ -21,7 +21,7 @@ To make any IP bans persist, set up a blacklist and automatically load the IP Ad
 
     cd /etc/fail2ban
         
-Next, you can either start from scratch with your own empty `ip.blacklist` or you you can import ours:
+You can either start from scratch with your own empty `ip.blacklist` or you you can import ours:
 
 
     # Start From Scratch
@@ -30,20 +30,30 @@ Next, you can either start from scratch with your own empty `ip.blacklist` or yo
     # Or Import Our List
     wget -P /etc/fail2ban/ https://raw.githubusercontent.com/SolidServerSystems/abusive-ips/master/ip.blacklist 
 
-Next, make up a backup of `/etc/fail2ban/action.d/iptables-multiport.conf` because we are going to edit this files config for `actionstart` and `actionban`.
+Make up a backup of `/etc/fail2ban/action.d/iptables-multiport.conf` before edits:
 
-    # Duplicate the config file first
     cp /etc/fail2ban/action.d/iptables-multiport.conf /etc/fail2ban/action.d/iptables-multiport.conf.org
 
 
-Let's edit the file, adding a line under the default `actionban` which will echo  the offending ip into our new blacklist file:
+Let's edit the config file...
+
+    vi /etc/fail2ban/action.d/iptables-multiport.conf
+    
+Adding the following line under the default `actionban` 
+
+    echo <ip> >> /etc/fail2ban/ip.blacklist
+    
+The result will look something like this
 
     actionban = iptables -I fail2ban-<name> 1 -s <ip> -j <blocktype>
                 echo <ip> >> /etc/fail2ban/ip.blacklist
-    
-Finally, let's make sure upon start fail2ban will load our iptable with rules to ban these ips. Append to `actionstart` so the final line looks something like this:
 
-    # original 
+Finally, let's make sure upon start fail2ban loads our iptable with rules to ban these ips. Append to `actionstart` this line:
+
+    cat /etc/fail2ban/ip.blacklist | while read IP; do iptables -I fail2ban-<name> 1 -s $IP -j DROP; done
+    
+The result will look something like this
+
     actionstart = iptables -N fail2ban-<name>
                   iptables -A fail2ban-<name> -j RETURN
                   iptables -I <chain> -p <protocol> -m multiport --dports <port> -j fail2ban-<name>
